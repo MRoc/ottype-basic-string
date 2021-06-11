@@ -1,0 +1,18 @@
+{
+  "name": "@mroc/ottype-basic-string",
+  "version": "1.0.0",
+  "description": "Proof-of-concept of a very simple textual operational transformation (OP) type for ShareDB.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MRoc/ottype-basic-string.git"
+  },
+  "author": "Matthias Mayrock",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^27.0.4"
+  }
+}
