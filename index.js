@@ -1,4 +1,4 @@
-const type = require("./custom-text.js");
+const type = require("./ottype-basic-string.js");
 
 module.exports = {
   type: type,

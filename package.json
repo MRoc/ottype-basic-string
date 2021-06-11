@@ -1,6 +1,6 @@
 {
   "name": "@mroc/ottype-basic-string",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Proof-of-concept of a very simple textual operational transformation (OP) type for ShareDB.",
   "main": "index.js",
   "scripts": {
