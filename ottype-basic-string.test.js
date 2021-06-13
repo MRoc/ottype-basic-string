@@ -67,13 +67,13 @@ describe("invertWithDoc", () => {
 });
 
 describe("transformPresence", () => {
-  test("insert before moves presence", () => {
+  test("insert before moves presence scalar", () => {
     const op = type.opInsert(1, "a");
     const presence = 3;
     const transformed = type.transformPresence(presence, op, false);
     expect(transformed).toBe(4);
   });
-  test("delete before moves presence", () => {
+  test("delete before moves presence scalar", () => {
     const op = type.opDelete(1);
     const presence = 3;
     const transformed = type.transformPresence(presence, op, false);

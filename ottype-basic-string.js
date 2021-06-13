@@ -70,12 +70,9 @@ exports.normalize = (obj) => {
 exports.transformPresence = (value, op, isOwnOp) => {
   // https://github.com/ottypes/text/blob/master/lib/text.js
   if (isOwnOp) {
-    return calculateInsertShift(ops, value);
+    return value + calculateShiftBefore(op, value);
   } else {
-    const shift = calculateShift(op, value);
-    return typeof value === "number"
-      ? value + shift
-      : [value[0] + shift, value[1] + shift];
+    return value + calculateShift(op, value);
   }
 };
 
@@ -93,9 +90,9 @@ function calculateShift(ops, index) {
     .reduce((a, b) => a + b, 0);
 }
 
-function calculateInsertShift(ops, index) {
+function calculateShiftBefore(ops, index) {
   return makeArray(ops)
-    .filter((op) => op.i <= index && op.o === "i")
-    .map((_) => -1)
+    .filter((op) => op.i < index)
+    .map((op) => (op.o === "i" ? +1 : -1))
     .reduce((a, b) => a + b, 0);
 }
