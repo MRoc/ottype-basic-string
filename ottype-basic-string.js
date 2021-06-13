@@ -67,6 +67,18 @@ exports.normalize = (obj) => {
   return obj;
 };
 
+exports.transformPresence = (value, op, isOwnOp) => {
+  // https://github.com/ottypes/text/blob/master/lib/text.js
+  if (isOwnOp) {
+    return calculateInsertShift(ops, value);
+  } else {
+    const shift = calculateShift(op, value);
+    return typeof value === "number"
+      ? value + shift
+      : [value[0] + shift, value[1] + shift];
+  }
+};
+
 function makeArray(obj) {
   if (!Array.isArray(obj)) {
     obj = [obj];
@@ -78,5 +90,12 @@ function calculateShift(ops, index) {
   return makeArray(ops)
     .filter((op) => op.i <= index)
     .map((op) => (op.o === "i" ? +1 : -1))
+    .reduce((a, b) => a + b, 0);
+}
+
+function calculateInsertShift(ops, index) {
+  return makeArray(ops)
+    .filter((op) => op.i <= index && op.o === "i")
+    .map((_) => -1)
     .reduce((a, b) => a + b, 0);
 }

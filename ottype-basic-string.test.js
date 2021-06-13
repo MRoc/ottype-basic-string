@@ -65,3 +65,18 @@ describe("invertWithDoc", () => {
     expect(invertOp).toStrictEqual(type.opInsert(1, "b"));
   });
 });
+
+describe("transformPresence", () => {
+  test("insert before moves presence", () => {
+    const op = type.opInsert(1, "a");
+    const presence = 3;
+    const transformed = type.transformPresence(presence, op, false);
+    expect(transformed).toBe(4);
+  });
+  test("delete before moves presence", () => {
+    const op = type.opDelete(1);
+    const presence = 3;
+    const transformed = type.transformPresence(presence, op, false);
+    expect(transformed).toBe(2);
+  });
+});
