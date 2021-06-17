@@ -34,6 +34,14 @@ describe("transform", () => {
     const op2 = type.transform(op0, op1, "left");
     expect(op2).toStrictEqual(type.opInsert(1, "a"));
   });
+  test("threw inserts before insert insert", () => {
+    const op0 = type.opInsert(4, "a");
+    const op1 = type.opInsert(0, "b");
+    const op2 = type.opInsert(1, "c");
+    const op3 = type.opInsert(2, "d");
+    const op4 = type.transform(op0, [op1, op2, op3], "left");
+    expect(op4).toStrictEqual(type.opInsert(7, "a"));
+  });
 });
 
 describe("compose", () => {

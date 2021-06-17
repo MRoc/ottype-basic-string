@@ -40,8 +40,8 @@ exports.transform = (op, otherOp, side) => {
 
   otherOp = makeArray(otherOp);
 
-  op = makeArray(op).map((o, i) => {
-    return { ...o, i: o.i + calculateShift(otherOp, i) };
+  op = makeArray(op).map((o) => {
+    return { ...o, i: o.i + calculateShift(otherOp, op.i) };
   });
 
   return exports.normalize(op);
