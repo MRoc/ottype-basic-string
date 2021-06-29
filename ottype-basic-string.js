@@ -68,11 +68,21 @@ exports.normalize = (obj) => {
 };
 
 exports.transformPresence = (value, op, isOwnOp) => {
-  // https://github.com/ottypes/text/blob/master/lib/text.js
-  if (isOwnOp) {
-    return value + calculateShiftBefore(op, value);
+  if (typeof value === "number") {
+    // https://github.com/ottypes/text/blob/master/lib/text.js
+    if (isOwnOp) {
+      return value + calculateShiftBefore(op, value);
+    } else {
+      return value + calculateShift(op, value);
+    }
   } else {
-    return value + calculateShift(op, value);
+    const v0 = exports.transformPresence(value.index, op, isOwnOp);
+    const v1 = exports.transformPresence(
+      value.index + value.length,
+      op,
+      isOwnOp
+    );
+    return { index: v0, length: Math.max(0, v1 - v0) };
   }
 };
 

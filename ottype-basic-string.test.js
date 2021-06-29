@@ -87,4 +87,10 @@ describe("transformPresence", () => {
     const transformed = type.transformPresence(presence, op, false);
     expect(transformed).toBe(2);
   });
+  test("insert before moves presence range", () => {
+    const op = type.opInsert(1, "a");
+    const presence = { index: 3, length: 4 };
+    const transformed = type.transformPresence(presence, op, false);
+    expect(transformed).toStrictEqual({ index: 4, length: 4 });
+  });
 });
